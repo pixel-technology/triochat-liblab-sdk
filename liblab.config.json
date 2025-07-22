@@ -7,7 +7,7 @@
   "createDocs": true,
   "languageOptions": {
     "typescript": {
-      "npmName": "triochat-sdk",
+      "npmName": "@triochat/triochat-sdk",
       "npmOrg": "triochat",
       "githubRepoName": "triochat-typescript-sdk",
       "sdkVersion": "1.0.0"
