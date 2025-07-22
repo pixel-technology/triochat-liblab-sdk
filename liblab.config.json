@@ -1,0 +1,40 @@
+{
+  "sdkName": "test-sdk",
+  "apiVersion": "1.0.0",
+  "apiName": "test-api",
+  "specFilePath": "spec.json",
+  "languages": [
+    "csharp",
+    "go",
+    "python",
+    "typescript"
+  ],
+  "createDocs": false,
+  "languageOptions": {
+    "python": {
+      "liblabVersion": "2",
+      "pypiPackageName": "petstore-sdk",
+      "githubRepoName": "",
+      "sdkVersion": "1.0.0"
+    },
+    "typescript": {
+      "npmName": "petstore-sdk",
+      "npmOrg": "",
+      "githubRepoName": "",
+      "sdkVersion": "1.0.0"
+    },
+    "go": {
+      "goModuleName": "github.com/swagger-api/swagger-petstore",
+      "githubRepoName": "",
+      "sdkVersion": "1.0.0"
+    },
+    "csharp": {
+      "githubRepoName": "",
+      "sdkVersion": "1.0.0",
+      "packageId": "Petstore.SDK"
+    }
+  },
+  "publishing": {
+    "githubOrg": ""
+  }
+}
