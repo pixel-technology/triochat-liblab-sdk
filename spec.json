@@ -1,63 +1,58 @@
 {
   "openapi": "3.0.0",
+  "info": {
+    "title": "Triochat SDK API",
+    "description": "send message SDK",
+    "version": "1.0.0"
+  },
   "paths": {
-    "/api/send-message": {
+    "/sdk/send-message": {
       "post": {
-        "operationId": "SendMessageController_sendMessage",
-        "parameters": [],
+        "operationId": "SdkController_sendMessage",
+        "tags": ["SDK"],
+        "security": [
+          {
+            "PAT-auth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SendMessageDto"
+                "$ref": "#/components/schemas/SdkSendMessageDto"
               }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": ""
+          "200": {
+            "description": "Message sent successfully"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
-        },
-        "tags": ["api"]
+        }
       }
     }
   },
-  "info": {
-    "title": "triochat APIs",
-    "description": "",
-    "version": "1.0",
-    "contact": {}
-  },
-  "tags": [
-    {
-      "name": "api",
-      "description": ""
-    }
-  ],
-  "servers": [],
   "components": {
     "securitySchemes": {
-      "bearer": {
-        "scheme": "bearer",
-        "bearerFormat": "JWT",
+      "PAT-auth": {
         "type": "http",
-        "name": "Authorization",
-        "description": "Enter JWT token",
-        "in": "header"
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     },
     "schemas": {
-      "ObjectId": {
-        "type": "object",
-        "properties": {}
-      },
       "Context": {
         "type": "object",
         "properties": {}
       },
-      "SendMessageDto": {
+      "SdkSendMessageDto": {
         "type": "object",
         "properties": {
           "country_code": {
@@ -71,12 +66,6 @@
           },
           "template_name": {
             "type": "string"
-          },
-          "lead_id": {
-            "$ref": "#/components/schemas/ObjectId"
-          },
-          "chat_id": {
-            "$ref": "#/components/schemas/ObjectId"
           },
           "messageText": {
             "type": "string"
@@ -93,9 +82,6 @@
           "mediaMessage": {
             "type": "object"
           },
-          "user_id": {
-            "$ref": "#/components/schemas/ObjectId"
-          },
           "media": {
             "type": "object"
           }
@@ -105,12 +91,9 @@
           "phone_number",
           "messageType",
           "template_name",
-          "lead_id",
-          "chat_id",
           "messageText",
           "components",
-          "context",
-          "user_id"
+          "context"
         ]
       }
     }
