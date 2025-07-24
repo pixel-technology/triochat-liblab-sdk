@@ -2,7 +2,7 @@
   "sdkName": "triochat-sdk",
   "apiVersion": "1.0.0",
   "apiName": "triochat-api",
-  "specFilePath": "https://scheduler-backend-64ov.onrender.com/docs/swagger-json",
+  "specFilePath": "./spec.json",
   "languages": ["typescript"],
   "createDocs": true,
   "languageOptions": {

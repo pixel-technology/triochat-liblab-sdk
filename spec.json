@@ -1,188 +1,117 @@
 {
   "openapi": "3.0.0",
-  "info": {
-    "version": "1.0.0",
-    "title": "Swagger Petstore",
-    "license": {
-      "name": "MIT"
-    }
-  },
-  "servers": [
-    {
-      "url": "http://petstore.swagger.io/v1"
-    }
-  ],
   "paths": {
-    "/pets": {
-      "get": {
-        "summary": "List all pets",
-        "operationId": "listPets",
-        "tags": [
-          "pets"
-        ],
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "How many items to return at one time (max 100)",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A paged array of pets",
-            "headers": {
-              "x-next": {
-                "description": "A link to the next page of responses",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Pets"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/api/send-message": {
       "post": {
-        "summary": "Create a pet",
-        "operationId": "createPets",
-        "tags": [
-          "pets"
-        ],
+        "operationId": "SendMessageController_sendMessage",
+        "parameters": [],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Pet"
+                "$ref": "#/components/schemas/SendMessageDto"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "201": {
-            "description": "Null response"
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
+            "description": ""
           }
-        }
-      }
-    },
-    "/pets/{petId}": {
-      "get": {
-        "summary": "Info for a specific pet",
-        "operationId": "showPetById",
-        "tags": [
-          "pets"
-        ],
-        "parameters": [
-          {
-            "name": "petId",
-            "in": "path",
-            "required": true,
-            "description": "The id of the pet to retrieve",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Expected response to a valid request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Pet"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
+        },
+        "tags": ["api"]
       }
     }
   },
+  "info": {
+    "title": "triochat APIs",
+    "description": "",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "api",
+      "description": ""
+    }
+  ],
+  "servers": [],
   "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "name": "Authorization",
+        "description": "Enter JWT token",
+        "in": "header"
+      }
+    },
     "schemas": {
-      "Pet": {
+      "ObjectId": {
         "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          },
-          "tag": {
-            "type": "string"
-          }
-        }
+        "properties": {}
       },
-      "Pets": {
-        "type": "array",
-        "maxItems": 100,
-        "items": {
-          "$ref": "#/components/schemas/Pet"
-        }
-      },
-      "Error": {
+      "Context": {
         "type": "object",
-        "required": [
-          "code",
-          "message"
-        ],
+        "properties": {}
+      },
+      "SendMessageDto": {
+        "type": "object",
         "properties": {
-          "code": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "message": {
+          "country_code": {
             "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "messageType": {
+            "type": "string"
+          },
+          "template_name": {
+            "type": "string"
+          },
+          "lead_id": {
+            "$ref": "#/components/schemas/ObjectId"
+          },
+          "chat_id": {
+            "$ref": "#/components/schemas/ObjectId"
+          },
+          "messageText": {
+            "type": "string"
+          },
+          "components": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "context": {
+            "$ref": "#/components/schemas/Context"
+          },
+          "mediaMessage": {
+            "type": "object"
+          },
+          "user_id": {
+            "$ref": "#/components/schemas/ObjectId"
+          },
+          "media": {
+            "type": "object"
           }
-        }
+        },
+        "required": [
+          "country_code",
+          "phone_number",
+          "messageType",
+          "template_name",
+          "lead_id",
+          "chat_id",
+          "messageText",
+          "components",
+          "context",
+          "user_id"
+        ]
       }
     }
   }
