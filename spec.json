@@ -2,14 +2,13 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Triochat SDK API",
-    "description": "send message SDK API",
     "version": "1.0"
   },
   "paths": {
     "/sdk/send-message": {
       "post": {
         "operationId": "SdkController_sendMessage",
-        "parameters": [],
+        "tags": ["SDK"],
         "requestBody": {
           "required": true,
           "content": {
@@ -45,8 +44,7 @@
           {
             "PAT-auth": []
           }
-        ],
-        "tags": ["SDK"]
+        ]
       }
     }
   },
@@ -55,12 +53,14 @@
       "PAT-auth": {
         "type": "http",
         "scheme": "bearer",
-        "bearerFormat": "JWT",
-        "name": "Authorization",
-        "in": "header"
+        "bearerFormat": "JWT"
       }
     },
     "schemas": {
+      "Context": {
+        "type": "object",
+        "properties": {}
+      },
       "SdkSendMessageDto": {
         "type": "object",
         "properties": {
@@ -82,7 +82,7 @@
           "components": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "object"
             }
           },
           "context": {
@@ -104,10 +104,6 @@
           "components",
           "context"
         ]
-      },
-      "Context": {
-        "type": "object",
-        "properties": {}
       }
     }
   }
