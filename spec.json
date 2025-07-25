@@ -2,19 +2,14 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Triochat SDK API",
-    "description": "send message SDK",
-    "version": "1.0.0"
+    "description": "send message SDK API",
+    "version": "1.0"
   },
   "paths": {
     "/sdk/send-message": {
       "post": {
         "operationId": "SdkController_sendMessage",
-        "tags": ["SDK"],
-        "security": [
-          {
-            "PAT-auth": []
-          }
-        ],
+        "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
@@ -27,15 +22,31 @@
         },
         "responses": {
           "200": {
-            "description": "Message sent successfully"
+            "description": "Message sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SdkSendMessageDto"
+                  }
+                }
+              }
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Bad request"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "401": {
+            "description": "Unauthorized - Invalid or missing token"
           }
-        }
+        },
+        "security": [
+          {
+            "PAT-auth": []
+          }
+        ],
+        "tags": ["SDK"]
       }
     }
   },
@@ -44,14 +55,12 @@
       "PAT-auth": {
         "type": "http",
         "scheme": "bearer",
-        "bearerFormat": "JWT"
+        "bearerFormat": "JWT",
+        "name": "Authorization",
+        "in": "header"
       }
     },
     "schemas": {
-      "Context": {
-        "type": "object",
-        "properties": {}
-      },
       "SdkSendMessageDto": {
         "type": "object",
         "properties": {
@@ -95,6 +104,10 @@
           "components",
           "context"
         ]
+      },
+      "Context": {
+        "type": "object",
+        "properties": {}
       }
     }
   }
