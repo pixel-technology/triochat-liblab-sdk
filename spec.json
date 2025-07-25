@@ -8,7 +8,7 @@
     "/sdk/send-message": {
       "post": {
         "operationId": "SdkController_sendMessage",
-        "tags": ["SDK"],
+        "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
@@ -44,23 +44,22 @@
           {
             "PAT-auth": []
           }
-        ]
+        ],
+        "tags": ["SDK"]
       }
     }
   },
   "components": {
     "securitySchemes": {
       "PAT-auth": {
-        "type": "http",
         "scheme": "bearer",
-        "bearerFormat": "JWT"
+        "bearerFormat": "JWT",
+        "type": "http",
+        "name": "Authorization",
+        "in": "header"
       }
     },
     "schemas": {
-      "Context": {
-        "type": "object",
-        "properties": {}
-      },
       "SdkSendMessageDto": {
         "type": "object",
         "properties": {
@@ -95,15 +94,11 @@
             "type": "object"
           }
         },
-        "required": [
-          "country_code",
-          "phone_number",
-          "messageType",
-          "template_name",
-          "messageText",
-          "components",
-          "context"
-        ]
+        "required": ["country_code", "phone_number", "messageType"]
+      },
+      "Context": {
+        "type": "object",
+        "properties": {}
       }
     }
   }
