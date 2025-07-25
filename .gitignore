@@ -137,3 +137,6 @@ dist
 
 # Generated SDKs
 output/
+
+
+hooks/
