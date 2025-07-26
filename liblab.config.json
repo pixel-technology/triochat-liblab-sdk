@@ -4,9 +4,9 @@
   "apiName": "triochat-api",
   "specFilePath": "./spec.json",
   "languages": ["typescript"],
-  "baseUrl": "https://scheduler-backend-dev.onrender.com",
+  "baseUrl": "https://scheduler-backend-64ov.onrender.com",
   "auth": ["bearer"],
-  "createDocs": true,
+  "createDocs": false,
   "languageOptions": {
     "typescript": {
       "npmName": "triochat-sdk",
